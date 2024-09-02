@@ -1,0 +1,31 @@
+CREATE TABLE Leitor (
+    Matricula INT PRIMARY KEY,
+    Telefone VARCHAR(15),
+    Endereco TEXT,
+    Tipo ENUM('Aluno', 'Funcionario')
+);
+CREATE TABLE Livro (
+    ISBN VARCHAR(13) PRIMARY KEY,
+    Titulo VARCHAR(255),
+    Autor VARCHAR(255),
+    Assunto VARCHAR(255),
+    Editora VARCHAR(255),
+    Quantidade INT
+);
+CREATE TABLE Emprestimo (
+    ID_Emprestimo INT AUTO_INCREMENT PRIMARY KEY,
+    Matricula_Leitor INT,
+    ISBN_Livro VARCHAR(13),
+    Data_Emprestimo DATE,
+    Data_Devolucao DATE,
+    FOREIGN KEY (Matricula_Leitor) REFERENCES Leitor(Matricula),
+    FOREIGN KEY (ISBN_Livro) REFERENCES Livro(ISBN)
+);
+CREATE TABLE Localizacao_Livro (
+    ISBN_Livro VARCHAR(13),
+    Estante INT,
+    Prateleira INT,
+    Nicho INT,
+    PRIMARY KEY (ISBN_Livro),
+    FOREIGN KEY (ISBN_Livro) REFERENCES Livro(ISBN)
+);
